@@ -1,0 +1,63 @@
+1. Install Verify Bundle => https://github.com/Toddish/Verify
+	
+	- install the bundle:
+		php artisan bundle:install verify
+
+	- register the 'Verify' bundle. add the following value to 'application/bundles.php':
+		'verify'    => array('auto' => true)
+
+	- change your Auth driver to 'verify' in application/config/auth.php:
+		'driver' => 'verify'
+
+	- change your Username value in application/config/auth.php to 'username:
+		'username' => 'username',
+
+	- create migration table:
+		php artisan migrate:install
+
+	- migrate the resources for 'Verify':
+		php artisan migrate verify
+
+2. Install Form Base-Model bundle => https://github.com/ShawnMcCool/laravel-form-base-model
+
+	- install the bundle:
+		php artisan bundle:install form-base-model
+
+	- register the 'Form Base-Model' bundle. add the following value to 'application/bundles.php':
+		'form-base-model' => array( 'auto' => true )
+
+3. Controller:
+
+	- filename: todos.php
+	- routing: Route::controller('todos');
+
+4. Views:
+
+	- location: application/views/todos
+	- layout file: application/views/templates
+
+5. Create application tasks generator:
+
+	- get the generator from https://gist.github.com/TheHydroImpulse/2872907
+	- create 'generate.php' file inside 'application/tasks' folder
+
+6. Model:
+
+	- generate 'todo' model:
+		php artisan generate:model todo user_id:integer task:string description:text
+
+	- generate 'todo' table:
+		php artisan migrate
+
+7. Create form base model:
+
+	- create form base model called 'todoform.php' inside 'bundles/form-base-model/models' folder
+	- register the 'todoform' model to the bundle's Autoloader (bundles/form-base-model/start.php):
+
+		Autoloader::map(array(
+			'ExampleForm' => __DIR__.'/models/exampleform.php',
+			'TodoForm' => __DIR__.'/models/todoform.php',
+		));
+
+
+
